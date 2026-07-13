@@ -29,3 +29,11 @@ PalRideMarkerComponent:SetRidingFlag
 ```
 
 SHA256SUM: `e7a86c2aa13bb6662f9192bc1613d3a72fa36df88123ebda83b673cff622db92`
+
+# v0.4
+
+https://github.com/NullPrism/Palworld/tree/main/NullPrismRuntimeTracer/v0.4_onlyrideevents
+
+Capture only ride/co-op-related events for 1.5 seconds after `OnStartCoopRequest`.
+
+SHA256: `e44aa16db419e85d835dbaa2ce63a2ba714f6d47d49eaff65361a31da0bd42bc`
