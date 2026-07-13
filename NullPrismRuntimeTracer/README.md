@@ -13,3 +13,19 @@ This version traces all calls. Be warned, it creates a lot of noise.
 https://github.com/NullPrism/Palworld/tree/main/NullPrismRuntimeTracer/v0.2_twosecond
 
 This version traces for two seconds after OnStartCoopRequest is triggered and traces every Pal-related ProcessEvent. It also suppresses high-frequency noise.
+
+# v0.3
+
+https://github.com/NullPrism/Palworld/tree/main/NullPrismRuntimeTracer/v0.3_targetedfunctions
+
+This version traces only these functions and records their parameter buffers both before and after execution:
+
+```
+BP_PalPlayerController:OnStartCoopRequest
+BP_OtomoPalHolderComponent:GetSpawnedOtomoID
+WBP_PlayerUI:OnRequestCoop
+PalRiderComponent:SetRideMarker_ToALL
+PalRideMarkerComponent:SetRidingFlag
+```
+
+SHA256SUM: `e7a86c2aa13bb6662f9192bc1613d3a72fa36df88123ebda83b673cff622db92`
