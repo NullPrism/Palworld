@@ -1,3 +1,1 @@
-# NullPrism Runtime Tracer
-
-A UE4SS C++ runtime tracing tool for Palworld.
+This version traces all calls. Be warned, it creates a lot of noise.
