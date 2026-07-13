@@ -12,4 +12,4 @@ This version traces all calls. Be warned, it creates a lot of noise.
 
 https://github.com/NullPrism/Palworld/tree/main/NullPrismRuntimeTracer/v0.2_twosecond
 
-This version traces for two seconds after OnStartCoopRequest is triggered.
+This version traces for two seconds after OnStartCoopRequest is triggered and traces every Pal-related ProcessEvent. It also suppresses high-frequency noise.
