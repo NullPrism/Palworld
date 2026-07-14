@@ -1,6 +1,6 @@
 # Aster's No Saddle
 
-**Aster's No Saddle** is a native UE4SS C++ mod for **Palworld** that allows rideable Pals to be mounted **without crafting or equipping their saddle**.
+**Aster's No Saddle** is a native UE4SS C++ mod for **Palworld** that allows rideable Pals to be mounted **without crafting their saddle**.
 
 The mod preserves each Pal's native ride behavior, animations, controls, attacks, and dismount logic while removing the saddle requirement.
 
