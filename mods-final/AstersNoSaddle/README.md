@@ -23,7 +23,7 @@ The mod preserves each Pal's native ride behavior, animations, controls, attacks
 
 ---
 
-## Tested Versions
+## Current Tested Versions
 
 | Component | Version |
 |-----------|---------|
