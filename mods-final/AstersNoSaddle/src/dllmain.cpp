@@ -801,8 +801,37 @@ namespace NullPrism
             }
 
             /*
-             * Fallback restriction removal. Even if an activation callback
-             * was missed, the first mount request still becomes usable.
+             * Remove the saddle restriction immediately before the
+             * game's native restriction query evaluates it.
+             *
+             * Only modify a partner-skill component whose owning Pal
+             * has an unambiguous ride marker. The original query then
+             * continues normally and reports the unrestricted state to
+             * the interaction UI.
+             */
+            if (function_matches(
+                    function,
+                    "PalPartnerSkillParameterComponent:IsRestrictedByItems"
+                ))
+            {
+                auto* marker =
+                    find_active_pal_marker(context);
+
+                if (marker != nullptr)
+                {
+                    clear_restriction_items(
+                        context,
+                        false
+                    );
+                }
+
+                return;
+            }
+
+            /*
+             * Preserve the working first-interaction fallback. If the
+             * earlier restriction-query path is missed, pressing F can
+             * still enter the normal mounting pipeline.
              */
             if (function_matches(
                     function,
@@ -814,8 +843,8 @@ namespace NullPrism
             }
 
             /*
-             * Restore the original marker position only after the normal
-             * ride pipeline confirms riding has started.
+             * Restore the original marker position only after the
+             * normal ride pipeline confirms riding has started.
              */
             if (function_matches(
                     function,
@@ -835,6 +864,8 @@ namespace NullPrism
             }
         }
 
+
+
         static auto process_event_post(
             Hook::TCallbackIterationData<void>&,
             UObject* context,
@@ -850,17 +881,12 @@ namespace NullPrism
             }
 
             /*
-             * Clear the restriction as soon as the partner skill becomes
-             * active. This should allow the UI to show Ride instead of
-             * Locked before the player presses F.
+             * Retain the original activation-time optimization without
+             * probe logging. On builds where PalUtility already exposes
+             * the active partner here, clear it immediately.
              */
             if (is_partner_activation_function(function))
             {
-                /*
-                 * Activation callbacks occur for many Pal actors while the
-                 * world is loading. Only modify the component currently
-                 * returned as the local player's active partner skill.
-                 */
                 auto* active_partner =
                     get_active_partner_component(context);
 
@@ -874,10 +900,12 @@ namespace NullPrism
             }
         }
 
+
+
     public:
         AstersNoSaddle()
         {
-            ModVersion = STR("1.0.2");
+            ModVersion = STR("1.0.5");
             ModName = STR("Aster's No Saddle");
             ModAuthors = STR("Aster");
             ModDescription = STR(
@@ -888,7 +916,7 @@ namespace NullPrism
             Output::send<LogLevel::Warning>(
                 STR(
                     "[AstersNoSaddle] DLL constructed. "
-                    "Version 1.0.2.\n"
+                    "Version 1.0.5.\n"
                 )
             );
         }
@@ -961,8 +989,7 @@ namespace NullPrism
 
             Output::send<LogLevel::Warning>(
                 STR(
-                    "[AstersNoSaddle] Ready. Partner restrictions will "
-                    "be removed on activation.\n"
+                    "[AstersNoSaddle] Ready. Partner restrictions will be removed when evaluated.\n"
                 )
             );
         }
